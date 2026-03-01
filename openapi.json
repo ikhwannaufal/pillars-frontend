@@ -1,0 +1,101 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Story API",
+        "description": "Branching story node API for Deadline & Adhan",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/story/start": {
+            "get": {
+                "tags": [
+                    "story"
+                ],
+                "summary": "Get first story node",
+                "operationId": "getStoryStart",
+                "responses": {
+                    "200": {
+                        "description": "First story node (id, text, choices)"
+                    },
+                    "404": {
+                        "description": "No story nodes found"
+                    }
+                }
+            }
+        },
+        "/api/story/{id}": {
+            "get": {
+                "tags": [
+                    "story"
+                ],
+                "summary": "Get story node by id",
+                "operationId": "getStoryNode",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Story node id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Story node (id, text, choices)"
+                    },
+                    "404": {
+                        "description": "Story node not found"
+                    }
+                }
+            }
+        },
+        "/api/story/next": {
+            "post": {
+                "tags": [
+                    "story"
+                ],
+                "summary": "Get next story node by choice",
+                "operationId": "getNextStoryNode",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "next_id"
+                                ],
+                                "properties": {
+                                    "next_id": {
+                                        "description": "ID of next node, or null for end of story",
+                                        "type": "integer",
+                                        "nullable": true
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "example": {
+                                "next_id": 2
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Story node, or ending object (ending: true, message: \"End of story\")"
+                    },
+                    "404": {
+                        "description": "Story node not found"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "story",
+            "description": "Branching story node API"
+        }
+    ]
+}
