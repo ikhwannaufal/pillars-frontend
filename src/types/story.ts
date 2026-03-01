@@ -1,6 +1,5 @@
 export interface Choice {
-  id: string;
-  text: string;
+  label: string;
   istiqamah: number;
   dunya: number;
   next_id: number | null;

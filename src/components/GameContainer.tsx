@@ -46,6 +46,7 @@ export function GameContainer() {
       setCurrentNode(nextData.data as unknown as StoryNode);
       setFetchNextEnabled(false);
       setNextId(null);
+      console.log({dunya, istiqamah});
     }
   }, [nextData, fetchNextEnabled]);
 

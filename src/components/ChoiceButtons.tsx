@@ -8,9 +8,9 @@ interface ChoiceButtonsProps {
 export function ChoiceButtons({ choices, onSelect }: ChoiceButtonsProps) {
   return (
     <div>
-      {choices.map((choice) => (
-        <button key={choice.id} onClick={() => onSelect(choice)}>
-          {choice.text}
+      {choices.map((choice, index) => (
+        <button key={index} onClick={() => onSelect(choice)}>
+          {choice.label}
         </button>
       ))}
     </div>
